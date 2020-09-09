@@ -38,9 +38,9 @@ public class PrimeNumbersController {
        int input = validateInputNumber(number);
        return numberIsPrime.isPrime(input);
     }
+    //TODO BDD Testing
     //TODO dependency injection check diff @Service and @Component in spring
-    //TODO check run method of interface ApplicationRunner of spring
-    //TODO the injected object that holds the array is singleton
+    //TODO Rate limiter
     @ApiOperation(value = "Find out the next prime after given number.", produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Check for prime number was successful"),
@@ -50,7 +50,7 @@ public class PrimeNumbersController {
     @GetMapping(path = "/nextprime/{number}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public int findNextPrime(@PathVariable int number) {
         int input = validateInputNumber(number);
-        return new NextPrime().nextPrime(number);
+        return numberIsPrime.nextPrime(number);
     }
 
     private int validateInputNumber(int num) {
