@@ -1,5 +1,11 @@
 package com.atanasradkov.primes.service;
 
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+@Service
 public class NumberIsPrime {
     public boolean isPrime(int num) {
         //check if n is a multiple of 2
@@ -21,4 +27,27 @@ public class NumberIsPrime {
                 return false;
         return true;*/
     }
+
+    public boolean checkIfPrime()
+
+    public ArrayList<Integer> generatePrimeNumbers(int number) {
+        var primeNumbers = new ArrayList<Integer>();
+
+        boolean[] prime = new boolean[number + 1];
+        Arrays.fill(prime, true);
+
+        for(int p = 2; p * p <= number; p++) {
+            for(int i = p * p; i <= number; i += p)
+                prime[i] = false;
+        }
+
+        for(int i = 2; i <= number; i++)
+        {
+            if(prime[i])
+                primeNumbers.add(i);
+        }
+
+        return primeNumbers;
+    }
+
 }
