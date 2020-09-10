@@ -1,12 +1,11 @@
 package com.atanasradkov.primes.rest;
 
-import com.atanasradkov.primes.NotSupportedInputException;
-import com.atanasradkov.primes.service.NextPrime;
-import com.atanasradkov.primes.service.NumberIsPrime;
+import com.atanasradkov.primes.service.PrimeNumberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "prime-numbers-api")
 public class PrimeNumbersController {
 
-    private static final int MAX_INPUT_NUMBER = 5000000;
+    private static final int MAX_INPUT_NUMBER = 2_000_000;
 
-    private NumberIsPrime numberIsPrime;
-    public PrimeNumbersController(NumberIsPrime numberIsPrime) {
-        this.numberIsPrime = numberIsPrime;
+    private PrimeNumberService primeNumberService;
+
+    @Autowired
+    public PrimeNumbersController(PrimeNumberService primeNumberService) {
+        this.primeNumberService = primeNumberService;
     }
     /**
      * Find out if a given number is a prime number.
@@ -36,7 +37,7 @@ public class PrimeNumbersController {
     @GetMapping(path = "/{number}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public boolean isPrime(@PathVariable int number) {
        int input = validateInputNumber(number);
-       return numberIsPrime.isPrime(input);
+       return primeNumberService.isPrimeSearchInCache(input);
     }
     //TODO BDD Testing
     //TODO dependency injection check diff @Service and @Component in spring
@@ -50,7 +51,7 @@ public class PrimeNumbersController {
     @GetMapping(path = "/nextprime/{number}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public int findNextPrime(@PathVariable int number) {
         int input = validateInputNumber(number);
-        return numberIsPrime.nextPrime(number);
+        return primeNumberService.nextPrime(number);
     }
 
     private int validateInputNumber(int num) {

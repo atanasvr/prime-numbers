@@ -1,4 +1,4 @@
-package com.atanasradkov.primes;
+package com.atanasradkov.primes.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
