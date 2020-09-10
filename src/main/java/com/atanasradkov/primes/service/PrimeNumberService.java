@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -43,7 +42,6 @@ public class PrimeNumberService {
                 return false;
         }
         return true;
-        // return primeNumbers.contains(num);
     }
 
     public boolean isPrimeSearchInCache(int num) {
@@ -58,7 +56,7 @@ public class PrimeNumberService {
     }
 
     public int nextPrime(int num) {
-        while(!isPrime(++num));
+        while(!isPrimeSearchInCache(++num));
         return num;
     }
 
@@ -70,11 +68,11 @@ public class PrimeNumberService {
                 primeNumbers.add(i);
             }
             currentMaxCache.set(i);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         log.info("Finished building cache");
     }
