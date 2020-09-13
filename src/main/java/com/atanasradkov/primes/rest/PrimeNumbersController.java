@@ -41,7 +41,7 @@ public class PrimeNumbersController {
        int input = validateInputNumber(number);
        return primeNumberService.isPrimeSearchInCache(input);
     }
-    //TODO BDD Testing
+    //TODO refactor http status code -> is
     //TODO Rate limiter
     @ApiOperation(value = "Find out the next prime after given number.", produces = "application/json")
     @ApiResponses(value = {

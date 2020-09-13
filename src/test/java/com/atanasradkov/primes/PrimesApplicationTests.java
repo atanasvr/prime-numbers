@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 class PrimesApplicationTests {
 
 	@Test
+	void smokeTest() {
+	}
+
+	@Test
 	void contextLoads() {
 	}
 
