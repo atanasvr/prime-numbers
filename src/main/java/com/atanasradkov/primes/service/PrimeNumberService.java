@@ -1,5 +1,6 @@
 package com.atanasradkov.primes.service;
 
+import com.atanasradkov.primes.configuration.PrimeCalculationConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class PrimeNumberService {
 
-    private final static int MAX_CACHE = 1_000_000;
+    private final PrimeCalculationConfig primesConfig;
 
     private Set<Integer> primeNumbers;
 
     private AtomicInteger currentMaxCache = new AtomicInteger(0);
 
-    public PrimeNumberService() {
+    public PrimeNumberService(PrimeCalculationConfig primesConfig) {
         primeNumbers = Collections.synchronizedSet(new HashSet<>());
+        this.primesConfig = primesConfig;
     }
 
     @PostConstruct
@@ -63,7 +65,7 @@ public class PrimeNumberService {
     public void generatePrimeNumbers() {
         log.info("Start building cache");
         primeNumbers.add(2);
-        for (int i = 1; i <= MAX_CACHE; i+=2) {
+        for (int i = 1; i <= primesConfig.getCacheUpperLimit(); i+=2) {
             if (isPrime(i)) {
                 primeNumbers.add(i);
             }

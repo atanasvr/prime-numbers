@@ -23,9 +23,14 @@ public class SmokeSteps extends AbstractSteps {
         executeGetRequest(isPrimeUrl+number);
     }
 
-    @Then("I should see result true")
-    public void iShouldSeeResultTrue() throws IOException {
+    @Then("I should see {string}")
+    public void iShouldSee(String result) throws IOException {
         this.checkStatus(200, false);
-        this.checkBodyContains("true");
+        this.checkBodyContains(result);
+    }
+
+    @When("I check on {string} if {string} is prime")
+    public void iCheckOnIfIsPrime(String isPrimeUrl, String invalidString) {
+        executeGetRequest(isPrimeUrl+invalidString);
     }
 }
