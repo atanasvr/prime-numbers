@@ -10,8 +10,8 @@ public class PrimesApiControllerSteps extends AbstractSteps {
     public void responseShouldBeJson() {
     }
 
-    @When("I open address {string} to check {string} is prime")
-    public void iOpenAddressToCheckIsPrime(String isPrimeUrl, String input) {
+    @When("I open address {string} to submit {string}")
+    public void iOpenAddressToSubmit(String isPrimeUrl, String input) {
         this.executeGetRequest(isPrimeUrl+input);
     }
 

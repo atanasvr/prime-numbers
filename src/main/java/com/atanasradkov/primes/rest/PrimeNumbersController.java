@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "prime-numbers-api")
 public class PrimeNumbersController {
 
-    // private static final int MAX_INPUT_NUMBER = 2_000_000;
     private final PrimeCalculationConfig primesConfig;
 
     private PrimeNumberService primeNumberService;
@@ -43,10 +42,7 @@ public class PrimeNumbersController {
        int input = validateInputNumber(number);
        return primeNumberService.isPrimeSearchInCache(input);
     }
-    //TODO refactor http status code -> is
     //TODO squash commits
-    //TODO javadoc
-    //TODO all steps to accept string as input, not int
     //TODO nextprime/number min, max, max+1, invalid string, error message json
     @ApiOperation(value = "Find out the next prime after given number.", produces = "application/json")
     @ApiResponses(value = {

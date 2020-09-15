@@ -2,7 +2,6 @@ package com.atanasradkov.primes.stepdefinitions;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
@@ -123,8 +122,7 @@ public class AbstractSteps {
    */
   void checkStatus(int status, boolean isNot) {
     Assert.isTrue(status > 0, "should return valid status");
-    Assert.isTrue(isNot ?
-                    responseEntity.getStatusCodeValue() != status : responseEntity.getStatusCodeValue() == status,
+    Assert.isTrue(isNot == (responseEntity.getStatusCodeValue() != status),
             "status code is not expected");
   }
 
