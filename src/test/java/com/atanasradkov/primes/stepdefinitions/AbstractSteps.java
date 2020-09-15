@@ -116,16 +116,9 @@ public class AbstractSteps {
    * @param status the expected or unexpected status
    * @param isNot  if true, test equality, inequality if false
    */
-//  void checkStatus(int status, boolean isNot) {
-//    Assert.isTrue(status > 0, "should return valid status");
-//    Assert.isTrue(isNot == (responseEntity.getStatusCodeValue() != status),
-//            "status code is not expected");
-//  }
-
   void checkStatus(int status, boolean isNot) {
     Assert.isTrue(status > 0, "should return valid status");
-    Assert.isTrue(isNot ?
-                    responseEntity.getStatusCodeValue() != status : responseEntity.getStatusCodeValue() == status,
+    Assert.isTrue(isNot == (responseEntity.getStatusCodeValue() != status),
             "status code is not expected");
   }
 

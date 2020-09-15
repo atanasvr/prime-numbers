@@ -4,10 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.io.IOException;
+
 public class PrimesApiControllerSteps extends AbstractSteps {
 
     @And("response should be json")
-    public void responseShouldBeJson() {
+    public void responseShouldBeJson() throws IOException {
+        this.checkJsonBody();
     }
 
     @When("I open address {string} to submit {string}")
