@@ -3,7 +3,6 @@ package com.atanasradkov.primes.stepdefinitions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,9 +21,6 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class AbstractSteps {
 
-  @LocalServerPort
-  protected int port;
-
   protected String getBaseUrl() {
     return "http://localhost:8080";
   }
@@ -35,14 +31,14 @@ public class AbstractSteps {
   private HttpHeaders httpHeaders;
 
   //@Autowired
-  private TestRestTemplate restTemplate;
+  private final TestRestTemplate restTemplate;
 
   //Stored http response
   private ResponseEntity<String> responseEntity;
-  private ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
 
   //List of query params for future use
-  private Map<String, String> queryParameters;
+  private final Map<String, String> queryParameters;
 
   public AbstractSteps() {
     this.restTemplate = new TestRestTemplate();
@@ -120,9 +116,16 @@ public class AbstractSteps {
    * @param status the expected or unexpected status
    * @param isNot  if true, test equality, inequality if false
    */
+//  void checkStatus(int status, boolean isNot) {
+//    Assert.isTrue(status > 0, "should return valid status");
+//    Assert.isTrue(isNot == (responseEntity.getStatusCodeValue() != status),
+//            "status code is not expected");
+//  }
+
   void checkStatus(int status, boolean isNot) {
     Assert.isTrue(status > 0, "should return valid status");
-    Assert.isTrue(isNot == (responseEntity.getStatusCodeValue() != status),
+    Assert.isTrue(isNot ?
+                    responseEntity.getStatusCodeValue() != status : responseEntity.getStatusCodeValue() == status,
             "status code is not expected");
   }
 

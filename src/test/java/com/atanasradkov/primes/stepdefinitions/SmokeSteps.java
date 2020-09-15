@@ -24,7 +24,7 @@ public class SmokeSteps extends AbstractSteps {
     }
 
     @Then("I should see {string}")
-    public void iShouldSee(String result) throws IOException {
+    public void iShouldSee(String result) {
         this.checkStatus(200, false);
         this.checkBodyContains(result);
     }

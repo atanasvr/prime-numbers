@@ -30,9 +30,9 @@ public class PrimeNumberService {
 
     private final PrimeCalculationConfig primesConfig;
 
-    private Set<Integer> primeNumbers;
+    private final Set<Integer> primeNumbers;
 
-    private AtomicInteger currentMaxCache = new AtomicInteger(0);
+    private final AtomicInteger currentMaxCache = new AtomicInteger(0);
 
     public PrimeNumberService(PrimeCalculationConfig primesConfig) {
         primeNumbers = Collections.synchronizedSet(new HashSet<>());
@@ -40,7 +40,7 @@ public class PrimeNumberService {
     }
 
     /**
-     * Inits the cache filling
+     * Initialize the cache filling
      * {@link #generatePrimeNumbers()}
      */
     @PostConstruct
@@ -49,8 +49,10 @@ public class PrimeNumberService {
     }
 
     /**
-     * Method that check if a given nubmer is prime
-     * @param num
+     * Method that check if a given number is prime
+     * @param num int input for validation if prime
+     *
+     * @return boolean true if prime, false otherwise
      */
     public boolean isPrime(int num) {
         if (num <=1 ) {

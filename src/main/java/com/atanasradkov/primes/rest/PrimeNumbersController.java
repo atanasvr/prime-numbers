@@ -19,7 +19,7 @@ public class PrimeNumbersController {
 
     private final PrimeCalculationConfig primesConfig;
 
-    private PrimeNumberService primeNumberService;
+    private final PrimeNumberService primeNumberService;
 
     @Autowired
     public PrimeNumbersController(PrimeCalculationConfig primesConfig, PrimeNumberService primeNumberService) {
@@ -30,9 +30,9 @@ public class PrimeNumbersController {
      * Find out if a given number is a prime number.
      *
      * @param number the number to check
-     * @return true if it's prime, false otherwise.
+     * @return boolean true if it's prime, false otherwise.
      */
-    @ApiOperation(value = "Find out if a given number is prime.", produces = "application/json")
+    @ApiOperation(value = "Find out if a given number is prime", produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Check for prime number was successful"),
             @ApiResponse(code = 400, message = "The provided input is invalid or is not in range between 2 and max range")
@@ -42,9 +42,14 @@ public class PrimeNumbersController {
        int input = validateInputNumber(number);
        return primeNumberService.isPrimeSearchInCache(input);
     }
-    //TODO squash commits
-    //TODO nextprime/number min, max, max+1, invalid string, error message json
-    @ApiOperation(value = "Find out the next prime after given number.", produces = "application/json")
+
+    /**
+     * Finds out the next prime after given number
+     *
+     * @param number the number to check
+     * @return int next prime number
+     */
+    @ApiOperation(value = "Find out the next prime after given number", produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Check for prime number was successful"),
             @ApiResponse(code = 400, message = "The provided input is invalid or is not in range between 2 and max range")
@@ -55,6 +60,12 @@ public class PrimeNumbersController {
         return primeNumberService.nextPrime(input);
     }
 
+    /**
+     * Validates if the input is alphanumeric string
+     *
+     * @param input String for validation
+     * @return parsed input as int
+     */
     private int validateInputNumber(String input) {
         try {
             int num = Integer.parseInt(input);
