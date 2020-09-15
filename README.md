@@ -11,7 +11,8 @@ The service will check if a provided number in range between `2 and max number` 
 5. Project should be listening on local port`8080`
 
 ##Running tests
-Tests created using Cucumber
+`./gradlew test` will run basic tests  
+Tests created using Cucumber:  
 After the project is started you can run the tests with `./gradlew cucumber`
 
 
