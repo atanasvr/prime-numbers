@@ -44,11 +44,10 @@ public class PrimeNumbersController {
        return primeNumberService.isPrimeSearchInCache(input);
     }
     //TODO refactor http status code -> is
+    //TODO squash commits
     //TODO javadoc
-    //TODO /number test 1, 2...maxnum, maxnum + 1, string, error message json
+    //TODO all steps to accept string as input, not int
     //TODO nextprime/number min, max, max+1, invalid string, error message json
-    //TODO Scenario outline new feature file, edge cases in this one?
-    //TODO SharedContext
     @ApiOperation(value = "Find out the next prime after given number.", produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Check for prime number was successful"),
